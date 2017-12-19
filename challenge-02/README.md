@@ -25,7 +25,7 @@ Onde VALOR é o novo valor da variável.
 */
 function MudaValue(){
     novavar = 7;
-    return "O valor da variável é 7";
+    return "O valor da variável é "+novavar;
     
 }
 
