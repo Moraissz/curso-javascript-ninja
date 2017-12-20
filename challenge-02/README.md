@@ -62,7 +62,7 @@ Aa(2,1);
 Aa(2,1,7)
 
 // Qual o resultado da invocação acima? (Use comentários para mostrar o valor retornado).
-// o Resultado é 14;
+// o Resultado é 16;
 
 /*
 Crie uma função com as seguintes características:
