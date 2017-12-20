@@ -43,7 +43,7 @@ Crie uma função com as seguintes características:
 3. O retorno da função deve ser a multiplicação dos 3 argumentos, somando `2` ao resultado da multiplicação.
 */
 function Aa(x,y,z){
-    if(z === undefined){
+    if((x === undefined) || (y=== undefined) || (z === undefined)){
       return 'Preencha todos os valor corretamente';
     }
     else
