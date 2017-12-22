@@ -10,14 +10,30 @@ para o contrário.
 var isTruthy = function(a){
     var b = a ? true:false;
     return b;
-}
+};
 
 // Invoque a função criada acima, passando todos os tipos de valores `falsy`.
-isTruthy(NaN,0,'',false,null,undefined,-0);
+isTruthy(NaN);
+isTruthy(0);
+isTruthy('');
+isTruthy(false);
+isTruthy(null);
+isTruthy(-0);
+isTruthy(undefined);
+
 /*
 Invoque a função criada acima passando como parâmetro 10 valores `truthy`.
 */
-isTruthy(1,'Lucas',7,'Morais',[],{},70,77,23,27);
+isTruthy(1);
+isTruthy(70);
+isTruthy(77);
+isTruthy(23);
+isTruthy(27);
+isTruthy([]);
+isTruthy({});
+isTruthy(7);
+isTruthy('Morais');
+isTruthy('Lucas');
 
 /*
 Declare uma variável chamada `carro`, atribuindo à ela um objeto com as
@@ -31,7 +47,16 @@ seguintes propriedades (os valores devem ser do tipo mostrado abaixo):
 - `assentos` - Number - cinco por padrão
 - `quantidadePessoas` - Number - zero por padrão
 */
-var carro = {marca : '', modelo : '' , placa : '', ano : 0 , cor :  '', quantasPortas : 0, assentos : 5, quantidadePessoas : 0};
+var carro = {
+    marca : 'Volvao',
+    modelo : 'z37', 
+    placa : 'HCK-4963', 
+    ano : 2017 , 
+    cor :  'Branco', 
+    quantasPortas : 4, 
+    assentos : 5, 
+    quantidadePessoas : 0
+};
 
 /*
 Crie um método chamado `mudarCor` que mude a cor do carro conforme a cor
@@ -39,7 +64,7 @@ passado por parâmetro.
 */
 carro.mudarCor = function(cor){
        carro.cor = cor;
-}
+};
 
 /*
 Crie um método chamado `obterCor`, que retorne a cor do carro.
@@ -112,7 +137,7 @@ retornar algum valor.
 
 Qual a cor atual do carro?
 */
-carro.obterCor();//'';
+carro.obterCor();//'Branco';
 
 // Mude a cor do carro para vermelho.
 carro.mudarCor('vermelho');
@@ -127,7 +152,7 @@ carro.mudarCor('verde musgo');
 carro.obterCor();//'verde musgo';
 
 // Qual a marca e modelo do carro?
-carro.obterMarcaModelo();//'Esse carro é um  '
+carro.obterMarcaModelo();//"Esse carro é um Volvao z37"
 
 // Adicione 2 pessoas no carro.
 carro.addPerson(2);//'Já temos 2 pessoas no carro!'
