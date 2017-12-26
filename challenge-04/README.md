@@ -120,7 +120,6 @@ carro.addPerson = function(qtdPessoas){
            }
            if (carro.assentos < (carro.quantidadePessoas + qtdPessoas))
            {
-                 
                  return "Só cabem mais " + (carro.assentos - carro.quantidadePessoas) +  ' '+ a + "!";
            }  
            carro.quantidadePessoas += qtdPessoas;
