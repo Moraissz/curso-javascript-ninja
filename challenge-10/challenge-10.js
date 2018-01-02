@@ -46,7 +46,7 @@
               '%' : function(number1,number2){
                     return number1 % number2;
               }
-    }
+    };
     
     /*
     Crie uma função chamada `isOperatorValid`, que receberá um operador por
@@ -59,7 +59,7 @@
     - O desafio é fazer o retorno sem usar "if" ou "switch".
     */
     function isOperatorValid(operator){
-         return  operator === '+' || operator === '-' || operator === '*' || operator === '/' || operator === '%' ? true : false;
+         return  !!operation[operator];
     }
     
     /*
@@ -78,7 +78,7 @@
         return isOperatorValid(operator) ? function(num1,num2){
              if(typeof num1 === 'number' && typeof num2 === 'number')
              {
-                 return operation['' + operator](num1,num2);
+                 return operation[operator](num1,num2);
              }    
              return false;
         } : false;
@@ -102,7 +102,7 @@
     'Operação "[OPERATOR]" não permitida!'
     */
     function showErrorMessage(operador){
-        return isOperatorValid(operador) ? '' : 'Operação ' + operador + ' não permitida!';
+        return isOperatorValid(operador) ? '' : 'Operação "' + operador + '" não permitida!';
     }
     
     /*
@@ -111,8 +111,8 @@
     - Declare 3 variáveis: "number1" e "number2", iniciando com valor zero, e
     "operationSignal", sem valor por enquanto.
     */
-    var number1;
-    var number2;
+    var number1 = 0;
+    var number2 = 0;
     var operationSignal;
     
     /*
@@ -179,4 +179,4 @@
     var operationSignal = '10';
     var mod = calculator(operationSignal);
     mod ? console.log(showOperationMessage(operationSignal,number1,number2),mod(number1,number2)):console.log(showErrorMessage(operationSignal));
-})()
+})();
