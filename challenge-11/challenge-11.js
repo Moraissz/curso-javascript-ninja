@@ -24,7 +24,7 @@
             name : 'Lucas Morais',
             age : 19,
             weight : 100,
-            birthday : '27/05/1998'
+            birthday : '27/05'
     };
 
     /*
@@ -66,7 +66,7 @@
         {
             break;
         }
-        numbers[i] = i;
+        numbers.push(i);
     }
     console.log(numbers);
     /*
@@ -77,26 +77,11 @@
     */
     console.log( 'Pares de 0 a 20:' );
     numbers = [];
-   /* var indice = 0;
     for(var i = 0 ; i <= 20; i++){
         if(i % 2 !== 0){
             continue;
-            
         }
-        numbers[indice] = i;
-        indice++;
-    } */
-    var i = 0;
-    var indice = 0;
-    while(i <= 20){
-        if(i % 2 !== 0){
-            i++;
-            continue;
-            
-        }
-        numbers[indice] = i;
-        indice++;
-        i++;
-    }
+       numbers.push(i);
+    } 
     console.log(numbers);
 })();
