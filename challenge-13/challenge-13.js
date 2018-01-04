@@ -124,8 +124,8 @@
     - "Nem todos os estados tem mais de 7 letras!"
     */
     console.log( '\nTodos os estados de `brasil` tem mais de 7 letras?' );
-    var verify = brasil.every(function(value){
-               return value < 7;
+    var verify = brasil.every(function(value){       
+        return value.length > 7;
     })
     verify ? console.log('Sim, todos os estados tem mais de 7 letras!') : console.log('Nem todos os estados tem mais de 7 letras!');
     
