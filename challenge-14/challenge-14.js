@@ -12,26 +12,21 @@
     Mostre esse array no console.
     */
     console.log( 'Number Objects Array:' );
-    var numberObjects = [
-        {number: 1}, 
-        {number: 2}, 
-        {number: 3}, 
-        {number: 4}, 
-        {number: 5}, 
-        {number: 6},
-        {number: 7},
-        {number: 8},
-        {number: 9},
-        {number: 10}
-    
-    ];
+    var numberObjects = []
+    for(var i = 1 ; i <= 10;i++)
+    {
+        numberObjects.push({number : i});
+    }
+
     console.log(numberObjects);
     /*
     Crie um array chamado `justNumbers`, que terá como elementos somente os
     números do array criado acima. Mostre esse novo array no console.
     */
     console.log( '\nJust Numbers:' );
-    var justNumbers = [1,2,3,4,5,6,7,8,9,10];
+    var justNumbers = numberObjects.map(function(value){
+                    return value.number;
+    })
     console.log(justNumbers);
     
     /*
@@ -41,9 +36,7 @@
     */
     console.log( '\nJust module of division by 2 or 3:' );
     var justMod2Or3 = justNumbers.filter(function(value){
-                  if(value % 2 === 0 || value % 3 === 0){
-                      return value;
-                  }
+                  return (value % 2 === 0 || value % 3 === 0)
     })
     console.log(justMod2Or3);
     /*
@@ -80,10 +73,10 @@
     falada, como se você estivesse falando em código xD
     */
     console.log( '\nSeu nome na língua do "P":' );
-    var name = ['L', 'u','c','a','s'];
-    var linguaP = name.reduce(function(acumulate,value,index){
-                return index === 2 ? acumulate + 'P' + value : acumulate + value;
-    })
+    var name = ['Lu','cas'];
+    var linguaP = name.reduce(function(acumulate,value){
+                return  acumulate + 'P' + value; 
+    },'')
     console.log(linguaP);
     
     /*
@@ -111,9 +104,8 @@
     o que acontece ;)
     */
     console.log( '\nExiste um { number: 2 } em numberObjects?' );
-    console.log('Creio que a resposta será positiva, devido a que dentro o array, existe mesmo esse objeto {number : 2}');
     var exist = numberObjects.indexOf({number : 2})
-    exist ? console.log('Existe um objeto { number: 2 } em numberObjects!') : console.log('Não existe um objeto { number: 2 } em numberObjects :(');
+    exist > -1  ? console.log('Existe um objeto { number: 2 } em numberObjects!') : console.log('Não existe um objeto { number: 2 } em numberObjects :(');
     
     /*
     Fazendo o mesmo do exercício acima, mas começando a buscar do último índice,
