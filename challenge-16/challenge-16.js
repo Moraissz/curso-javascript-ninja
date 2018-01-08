@@ -37,13 +37,12 @@
     */
     console.log( '\nNome convertido à partir de um slug:' );
     var fullName = 'lucas-morais';
-    var split = fullName.split('-');
-    var firstName = split[0];
-    var LastName = split[1];
-    firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
-    LastName = LastName.charAt(0).toUpperCase() + LastName.slice(1);
-    console.log(firstName.concat(' ' , LastName));
-    
+    var arrFullName = fullName.split('-');
+    var nameNoSlug = arrFullName.map(function(value){
+                 return value.charAt(0).toUpperCase() + value.slice(1);
+    });
+    console.log(fullName);
+    console.log(nameNoSlug.join(' '));
     
     /*
     - Crie um array com 5 nomes. Reduza esses nomes a uma única string, separando
@@ -58,8 +57,12 @@
     var arr = ['Carlos','Matheus','Joara','Arahilda','Giovanna'];
     var allName = arr.join(', ');
     allName = allName.substring(0,allName.lastIndexOf(',')) + ' e ' + arr[arr.length -1];
-    console.log(allName);
-    
+    console.log(allName.concat(' são meus amigos.'));
+    // JEITO MAIS PRATICO
+    // arr.reduce(function(acumulate,value,index){
+    //           var separador = arr.length - 1 === index ? 'e ' : ', '
+    //           return acumulate + separador + value;
+    // })
     
     /*
     Usando o replace(), faça a string "Roberto" virar "Roberta".
@@ -69,7 +72,8 @@
      var roberto  = 'Roberto';
      roberto = roberto.slice(0,roberto.length-1) + roberto.charAt(roberto.length-1).toUpperCase() ;
      console.log(roberto.replace('O','a'));
-    
+    //JEITO MAIS SIMPLES
+    //console.log('Roberto'.replace('to','ta));
     /*
     Mostre no console a parte "nando" da string "Fernando". Use o método que
     faz a busca do final para o início da string.
