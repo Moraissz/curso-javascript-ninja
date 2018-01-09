@@ -93,6 +93,26 @@
 
          }
     }
+    //MODO MAIS PRÁTICO
+   /*  function getMonthNumber(month){
+        var obj = {
+             janeiro : '01',
+             fevereiro : '02',
+             'março' : '03',
+              abril :  '04',
+              maio: '05',
+              junho :  '06',
+              julho :  '07',
+              agosto :  '08',
+              setembro :  '09',
+              outubro :  '10',
+              novembro :  '11',
+              dezembro :  '12'
+
+        }
+           return obj[month];
+        }
+   } */
     console.log('O mês de '+ month +' é representado pelo número ' + getMonthNumber(month) + '.');
     month = 'fevereiro';
     console.log('O mês de '+ month +' é representado pelo número ' + getMonthNumber(month) + '.');
@@ -127,7 +147,7 @@
     Mostre a regex no console.
     */
     console.log( '\nRegex que vai fazer o match com as datas do texto:' );
-    var regexDate = /(\d\d)( )(de )(julho)( de) (\d\d\d\d)|(\d\d)( )(de )(junho)( de) (\d\d\d\d)/g
+    var regexDate = /(\d\d) de (junho|julho) de (\d\d\d\d)/g
     console.log(regexDate);
     //(\d\d)( )(de)( junho)( de) (\d\d\d\d)
     /*
@@ -138,14 +158,8 @@
     console o resultado.
     */
     console.log( '\nReplace de datas:' );
-    function replaceDate(caputraTotal,dia1,espaco,de1,month,de2,ano,dia2,espaco2,de3,month2,de4,ano1){
-        return month !== undefined ? 
-        dia1 + '/' + getMonthNumber(month) + '/' + ano : 
-        dia2 + '/' +getMonthNumber(month2) + '/' + ano1;
+    function replaceDate(caputraTotal,day,month,year){
+        return day + '/' + getMonthNumber(month) + '/' + year
     }
-    console.log(text.replace(regexDate,function replaceDate(caputraTotal,dia1,espaco,de1,month,de2,ano,dia2,espaco2,de3,month2,de4,ano1){
-        return month !== undefined ? 
-        dia1 + '/' + getMonthNumber(month) + '/' + ano : 
-        dia2 + '/' +getMonthNumber(month2) + '/' + ano1;
-    }));
+    console.log(text.replace(regexDate,replaceDate));
 })();
