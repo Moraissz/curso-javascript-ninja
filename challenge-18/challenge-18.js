@@ -34,13 +34,19 @@
     */
     console.log( '\nFormatando CPFs corretamente:' );
     var regex = /\d{2,3}/g
-    var cpf = '04921434211';
-    var arrayCPF = cpf.match(regex)
+    var cpf = ['04921434211','21045852205','73550079422','10112313132'];
+    cpf.forEach(function(value){
+    var arrayCPF = value.match(regex)
     var formatedcpf = arrayCPF.reduce(function(acumulate,value,index){
                     return index === (arrayCPF.length-1) ? acumulate + '-' + value : acumulate + '.' + value;
     })
     console.log(formatedcpf);
+    })
+    //JEITO MAIS PRATICO
     
+ /*    cpf.forEach(function(value){
+              console.log(value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,'$1.$2.$3-$4'));
+    }); */
     /*
     Crie uma expressão regular que faça match com as palavras "junho" ou "julho",
     usando o mínimo de caracteres possíveis na regex.
