@@ -1,5 +1,5 @@
 (function(){
-
+      'use strict';
     /*
     1. Envolva todo o conteúdo desse desafio em uma IIFE.
     2. Adicione a diretiva 'use strict';
@@ -87,19 +87,11 @@
     console.log( '\nQuais classes CSS existem na marcação abaixo?\n\n', markup, '\n' );
     var cssClass = 'container';
     function hasClass(markup,cssClass){
-        var regex = /class=(.)(.+?)(?:\1)/gm
-        var arrClass = [];
-        markup.replace(regex,function(Captotal,gropu1,gropu2){
-                  arrClass.push(gropu2);
-        });
-        return (
-                arrClass.some(function(value){
-                return value === cssClass;
-                })
-              )
+        var regex = new RegExp('class=["\'](?:[\\w\\s]+)?' + cssClass + '(?:[\\w\\s]+)?[\'"]');
+        return regex.test(markup);
     
     }
-    var arrClass = ['container','text date','excerpt','lalalala'];
+    var arrClass = ['container','excerpt','date','main','text'];
     arrClass.forEach(function(value){
              console.log(hasClass(markup,value) + ' para a classe ' + value);
     })
