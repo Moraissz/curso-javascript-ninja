@@ -87,7 +87,7 @@
     console.log( '\nQuais classes CSS existem na marcação abaixo?\n\n', markup, '\n' );
     var cssClass = 'container';
     function hasClass(markup,cssClass){
-        var regex = new RegExp('class=["\'](?:[\\w\\s]+)?' + cssClass + '(?:[\\w\\s]+)?[\'"]');
+        var regex = new RegExp('class=["\'](?:[\\w\\s]+)?' + cssClass + '(?:[\\s\\w]+)?[\'"]');
         return regex.test(markup);
     
     }
