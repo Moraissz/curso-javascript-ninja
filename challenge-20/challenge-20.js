@@ -108,15 +108,15 @@
                 event.preventDefault();
                 var alerttest = false;
                 if($inputUsername.value === '')
-                  return  alert('Preencha o nome do usuário!');
+                   return  alert('Preencha o nome do usuário!');
                 if($inputEmail.value === '')
                    return alert('Preencha o e-mail!');
-                if($message.value === '')
-                    return alert('Preencha a mensagem!');
                 if(!isValidEmail($inputEmail.value))
-                    return alert('Entre com um e-mail válido!');                             
+                   return alert('Entre com um e-mail válido!');                             
+                if($message.value === '')
+                   return alert('Preencha a mensagem!');
                 if(confirm('Tem certeza que deseja enviar o formulário?'))
-                  return alert('Enviado com sucesso!')
+                   return alert('Enviado com sucesso!')
 
                 return alert('Não enviado');
 
