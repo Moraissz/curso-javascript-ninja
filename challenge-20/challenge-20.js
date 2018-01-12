@@ -16,11 +16,8 @@
     nome, `username` deve receber "Desconhecido".
     Com a resposta, mostre um alert com a mensagem "Bem vindo [USERNAME]!"
     */
-    var username  = win.prompt('Qual o seu nome');
-    if(username)
-        win.alert('Bem vindo ' + username  + '!');
-    else
-    username = 'Desconhecido';
+    var username  = win.prompt('Qual o seu nome') || 'Desconhecido';
+    win.alert('Bem vindo '+ username +'!');
     
     /*
     Agora, pergunte ao usuário "Qual o seu e-mail?", atribuindo o resultado à
@@ -84,36 +81,46 @@
         Caso contrário, mostre um alerta com a mensagem:
         - "Não enviado."
         */
+        //Crianddo um objeto ao inves de usar if...
+/*                  var objTest = {
+            emptyUser :  function($username){
+                        if($username.value === '')
+                            return alert('Preencha o nome do usuário!');
+            },
+            emptyEmail : function($email){
+                         if($email.value === '')
+                            return alert('Preencha o e-mail!');
+
+            },
+            invalidEmail : function($email){
+                           if(!isValidEmail($email.value))
+                            return alert('Entre com um e-mail válido!');
+            },
+            emptyMessage : function($message){
+                           if($message.value === '')
+                            return alert('Preencha a mensagem!');
+
+            }
+ 
+        }  */
         $button.addEventListener('click',
         function(event){
                 event.preventDefault();
                 var alerttest = false;
-                if($inputUsername.value === ''){
-                    alert('Preencha o nome do usuário!');
-                    alerttest = true;
+                if($inputUsername.value === '')
+                  return  alert('Preencha o nome do usuário!');
+                if($inputEmail.value === '')
+                   return alert('Preencha o e-mail!');
+                if($message.value === '')
+                    return alert('Preencha a mensagem!');
+                if(!isValidEmail($inputEmail.value))
+                    return alert('Entre com um e-mail válido!');                             
+                if(confirm('Tem certeza que deseja enviar o formulário?'))
+                  return alert('Enviado com sucesso!')
 
-                }
-                if($inputEmail.value === ''){
-                    alert('Preencha o e-mail!');
-                    alerttest = true;
-                }
-                    
-                if($message.value === ''){
-                    alert('Preencha a mensagem!');
-                    alerttest = true;
-                }
-                console.log(isValidEmail($inputEmail.value));
-                if(!isValidEmail($inputEmail.value)){
-                    alert('Entre com um e-mail válido!')                             
-                    alerttest = true;
-                }
-                if(!alerttest){
-                  if(prompt('Tem certeza que deseja enviar o formulário?'))
-                        alert('Enviado com sucesso');
-                
-                  else
-                  alert('Não enviado');
-                }
+                return alert('Não enviado');
+
+               
         
         },false)
         
@@ -144,7 +151,7 @@
         - "agua_@evida.br.com"
         */
         function isValidEmail(email){
-            var regex = /^\w[\w.+]+@[\w]+.\w{2,}(?:.\w{1,2})?$/
+            var regex = /^\w[\w.+]+@\w+\.\w{2,}(?:\.\w{1,2})?$/
             return regex.test(email);
         }
     })(window,document);
