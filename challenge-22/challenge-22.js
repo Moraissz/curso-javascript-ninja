@@ -90,5 +90,5 @@
   números desse array e mostre o resultado no console.
   */
   console.log( '\nSomar números entrados pelo usuário:' );
-  console.log(sum.apply(sum,numbers));
+  console.log(sum.apply(null,numbers));
 })();
