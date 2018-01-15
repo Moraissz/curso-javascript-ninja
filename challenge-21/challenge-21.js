@@ -20,25 +20,22 @@
     var $start = document.querySelector('[data-js="start"]');
     var $stop = document.querySelector('[data-js="stop"]');
     var $reset = document.querySelector('[data-js="reset"]');
-    var counter = 0;
     var temporizador;
     $cronometro.value = 0;
-    $start.addEventListener('click',function(){
-       function timer(){
-        $cronometro.value = counter++;
-        temporizador = setTimeout(timer,1000);
-       }
-       timer();
-
-    },false)
-    $stop.addEventListener('click',function(){
-          clearTimeout(temporizador);
-    },false)    
-    $reset.addEventListener('click',function(){
-            counter = 0;
-            $cronometro.value = counter
-            clearTimeout(temporizador);
-    },false)
+    $start.addEventListener('click',timer,false);
+    $stop.addEventListener('click',stopTimer,false);
+    $reset.addEventListener('click',resetTimer,false);
+    function timer(){
+    $cronometro.value = Number($cronometro.value) + 1;
+    temporizador = setTimeout(timer,1000);
+    }
+    function stopTimer(){
+        clearTimeout(temporizador);
+  }
+  function resetTimer(){
+    $cronometro.value = 0;
+    stopTimer();
+}
 
 
 })(window,document);
