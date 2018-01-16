@@ -27,17 +27,28 @@ Array.prototype.forEach.call($buttonsOperations, function(button) {
 $buttonCE.addEventListener('click', handleClickCE, false);
 $buttonEqual.addEventListener('click', handleClickEqual, false);
 
+
 function handleClickNumber() {
-  $visor.value += this.value;
+    removeZeroFromVisorifItDontHaveAnyNumber();
+    AddValueOnVisor(this);
 }
 
 function handleClickOperation() {
   $visor.value = removeLastItemIfItIsAnOperator($visor.value);
-  $visor.value += this.value;
+  AddValueOnVisor(this);
 }
 
 function handleClickCE() {
   $visor.value = 0;
+}
+
+function AddValueOnVisor(item){
+  $visor.value += item.value;
+}
+
+function removeZeroFromVisorifItDontHaveAnyNumber(){
+      if($visor.value === '0')
+        $visor.value = '';
 }
 
 function isLastItemAnOperation(number) {
