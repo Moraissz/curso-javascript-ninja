@@ -1,3 +1,5 @@
+(function(){
+  'use strict';
 /*
 Nossa calculadora agora está funcional! A ideia desse desafio é modularizar
 o código, conforme vimos na aula anterior. Quebrar as responsabilidades
@@ -54,22 +56,36 @@ function removeLastItemIfItIsAnOperator(number) {
 }
 
 function handleClickEqual() {
-  $visor.value = removeLastItemIfItIsAnOperator($visor.value);
-  var allValues = $visor.value.match(/\d+[+x÷-]?/g);
+  var allValues = createArrayOfAllValues();
   $visor.value = allValues.reduce(function(accumulated, actual) {
-    var firstValue = accumulated.slice(0, -1);
-    var operator = accumulated.split('').pop();
-    var lastValue = removeLastItemIfItIsAnOperator(actual);
-    var lastOperator = isLastItemAnOperation(actual) ? actual.split('').pop() : '';
-    switch(operator) {
-      case '+':
-        return ( Number(firstValue) + Number(lastValue) ) + lastOperator;
-      case '-':
-        return ( Number(firstValue) - Number(lastValue) ) + lastOperator;
-      case 'x':
-        return ( Number(firstValue) * Number(lastValue) ) + lastOperator;
-      case '÷':
-        return ( Number(firstValue) / Number(lastValue) ) + lastOperator;
-    }
+    return variablesFromOperation(accumulated,actual);
   });
 }
+
+function createArrayOfAllValues(){
+  $visor.value = removeLastItemIfItIsAnOperator($visor.value);
+    return $visor.value.match(/\d+[+x÷-]?/g);
+}
+
+function variablesFromOperation(accumulated,actual){
+  var firstValue = accumulated.slice(0, -1);
+  var operator = accumulated.split('').pop();
+  var lastValue = removeLastItemIfItIsAnOperator(actual);
+  var lastOperator = isLastItemAnOperation(actual) ? actual.split('').pop() : '';
+  return resultOfOperation(operator,firstValue,lastValue,lastOperator);
+}
+
+function resultOfOperation(operator,firstValue,lastValue,lastOperator)
+{
+  switch(operator) {
+    case '+':
+      return ( Number(firstValue) + Number(lastValue) ) + lastOperator;
+    case '-':
+      return ( Number(firstValue) - Number(lastValue) ) + lastOperator;
+    case 'x':
+      return ( Number(firstValue) * Number(lastValue) ) + lastOperator;
+    case '÷':
+      return ( Number(firstValue) / Number(lastValue) ) + lastOperator;
+  }
+}
+})();
