@@ -14,3 +14,28 @@ https://developer.mozilla.org/en-US/docs/Web/Events#Categories
 Tente aplicar na prática alguns dos eventos que estão ali e coloque nesse
 desafio os experimentos legais que você conseguir desenvolver :D
 */
+var $a = document.querySelector('[data-js="a"]');
+var $select = document.querySelector('[data-js="select"]');
+var $input = document.querySelector('[data-js="input"]');
+var $progress = document.querySelector('[data-js="progress"]');
+$a.addEventListener('mouseleave',function(event){
+  event.preventDefault();
+  console.log('oi, sai do a');
+  console.log($progress.value++);
+},false);
+$a.addEventListener('paste',function(){
+  console.log('Copiado com sucesso!');
+},false);
+$a.addEventListener('whell',function(){
+  console.log('Wheeled')
+},false);
+$select.addEventListener('change',function(){
+  console.log('mudou');
+},false)
+$input.addEventListener('compositionstart',function(){
+  console.log('HasChanged!');
+},false)
+$progress.addEventListener('ValueChange',function(){
+  console.log('HasChanged!');
+},false)
+console.log($progress.value);
