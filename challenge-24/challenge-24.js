@@ -18,15 +18,20 @@ var $buttonsOperations = document.querySelectorAll('[data-js="button-operation"]
 var $buttonCE = document.querySelector('[data-js="button-ce"]');
 var $buttonEqual = document.querySelector('[data-js="button-equal"]');
 
-Array.prototype.forEach.call($buttonsNumbers, function(button) {
-  button.addEventListener('click', handleClickNumber, false);
-});
-Array.prototype.forEach.call($buttonsOperations, function(button) {
-  button.addEventListener('click', handleClickOperation, false);
-});
-$buttonCE.addEventListener('click', handleClickCE, false);
-$buttonEqual.addEventListener('click', handleClickEqual, false);
+function initialize(){
+    initEvents();
+}
 
+function initEvents(){
+  Array.prototype.forEach.call($buttonsNumbers, function(button) {
+    button.addEventListener('click', handleClickNumber, false);
+  });
+  Array.prototype.forEach.call($buttonsOperations, function(button) {
+    button.addEventListener('click', handleClickOperation, false);
+  });
+  $buttonCE.addEventListener('click', handleClickCE, false);
+  $buttonEqual.addEventListener('click', handleClickEqual, false);
+}
 
 function handleClickNumber() {
     removeZeroFromVisorifItDontHaveAnyNumber();
@@ -52,17 +57,22 @@ function removeZeroFromVisorifItDontHaveAnyNumber(){
 }
 
 function isLastItemAnOperation(number) {
-  var operations = ['+', '-', 'x', '÷'];
+  var operations = getOperations();
   var lastItem = number.split('').pop();
   return operations.some(function(operator) {
     return operator === lastItem;
   });
 }
 
+function getOperations(){
+  return Array.prototype.map.call($buttonsOperations,function(operation){
+          return operation.value;
+  })
+}
+
 function removeLastItemIfItIsAnOperator(number) {
-  if(isLastItemAnOperation(number)) {
+  if(isLastItemAnOperation(number))
     return number.slice(0, -1);
-  }
   return number;
 }
 
@@ -75,28 +85,38 @@ function handleClickEqual() {
 
 function createArrayOfAllValues(){
   $visor.value = removeLastItemIfItIsAnOperator($visor.value);
-    return $visor.value.match(/\d+[+x÷-]?/g);
+  return $visor.value.match(createRegexOfOperations());
+}
+
+function createRegexOfOperations(){
+  return new RegExp('\\d+[' + getOperations().join('') + ']?', 'g');
+
 }
 
 function variablesFromOperation(accumulated,actual){
   var firstValue = accumulated.slice(0, -1);
   var operator = accumulated.split('').pop();
   var lastValue = removeLastItemIfItIsAnOperator(actual);
-  var lastOperator = isLastItemAnOperation(actual) ? actual.split('').pop() : '';
-  return resultOfOperation(operator,firstValue,lastValue,lastOperator);
+  var lastOperator = getLastOperator(actual);
+  return resultOfOperation(operator,firstValue,lastValue) + lastOperator;
 }
 
-function resultOfOperation(operator,firstValue,lastValue,lastOperator)
+function getLastOperator(actual){
+  return isLastItemAnOperation(actual) ? actual.split('').pop() : '';
+}
+
+function resultOfOperation(operator,firstValue,lastValue)
 {
   switch(operator) {
     case '+':
-      return ( Number(firstValue) + Number(lastValue) ) + lastOperator;
+      return  Number(firstValue) + Number(lastValue);
     case '-':
-      return ( Number(firstValue) - Number(lastValue) ) + lastOperator;
+      return  Number(firstValue) - Number(lastValue);
     case 'x':
-      return ( Number(firstValue) * Number(lastValue) ) + lastOperator;
+      return  Number(firstValue) * Number(lastValue);
     case '÷':
-      return ( Number(firstValue) / Number(lastValue) ) + lastOperator;
+      return  Number(firstValue) / Number(lastValue);
   }
 }
+initialize();
 })();
