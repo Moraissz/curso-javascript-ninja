@@ -21,21 +21,24 @@
   Dica: olhe os erros que acontecem no console, e vá resolvendo um a um.
   Só passe para o próximo problema quando tiver resolvido o anterior :)
   */
-  function DOM(selectedNode){
-    this.element = document.querySelectorAll(selectedNode);
-    this.on = function on(event,callback){
-      Array.prototype.forEach.call(this.element,function(value){
-        value.addEventListener(event,callback,false);
-      });
-    }
-    this.off = function off(event,callback){
-      Array.prototype.forEach.call(this.element,function(value){
-        value.removeEventListener(event,callback,false);
-      });
-    }
-    this.get = function(){
-              return this.element;
-    }
+  function DOM(selectedNodes){
+    this.element = document.querySelectorAll(selectedNodes);
+  }
+
+  DOM.prototype.on = function on(event,callback){
+    Array.prototype.forEach.call(this.element,function(value){
+    value.addEventListener(event,callback,false);
+  });
+}
+
+  DOM.prototype.off = function off(event,callback){
+    Array.prototype.forEach.call(this.element,function(value){
+      value.removeEventListener(event,callback,false);
+    });
+  }
+
+  DOM.prototype.get = function get(){
+            return this.element;
   }
 
   var $a = new DOM('[data-js="link"]');
