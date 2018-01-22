@@ -81,6 +81,9 @@
   }
 
   var $a = new DOM('[data-js="link"]');
-  console.log(DOM.isNull(1));
+  $a.forEach(function(item){
+      console.log(item.firstChild.nodeValue);
+  })
+  console.log(DOM.isArray({}));
 
 })();
