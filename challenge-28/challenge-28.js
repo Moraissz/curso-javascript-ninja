@@ -111,20 +111,19 @@
   }
 
   function isCEPValid(){
-    var result
+    var result;
     try {
-        console.log('oi');
-        result = JSON.parse(ajax.responseText);
-    } catch (error) {
-
-         result =  null;
+      result = JSON.parse(ajax.responseText);
     }
-     return result;
+    catch(e) {
+      result = null;
+    }
+    return result;
   }
+
 
   function fillingInputs(){
         var responseText = isCEPValid();
-        console.log(responseText);
         if(!responseText){
           $inputMessage.value = getMessage('error');
           responseText = clearData();
