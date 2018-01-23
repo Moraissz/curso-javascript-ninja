@@ -1,4 +1,4 @@
-(function() {
+(function(window) {
   'use strict';
 
   /*
@@ -16,24 +16,82 @@
     - Placa
     - Cor
     - e um botão "Cadastrar"
-
   Logo abaixo do formulário, deverá ter uma tabela que irá mostrar todos os
   carros cadastrados. Ao clicar no botão de cadastrar, o novo carro deverá
   aparecer no final da tabela.
-
   Agora você precisa dar um nome para o seu app. Imagine que ele seja uma
   empresa que vende carros. Esse nosso app será só um catálogo, por enquanto.
   Dê um nome para a empresa e um telefone fictício, preechendo essas informações
   no arquivo company.json que já está criado.
-
   Essas informações devem ser adicionadas no HTML via Ajax.
-
   Parte técnica:
   Separe o nosso módulo de DOM criado nas últimas aulas em
   um arquivo DOM.js.
-
   E aqui nesse arquivo, faça a lógica para cadastrar os carros, em um módulo
   que será nomeado de "app".
   */
+   function app()
+   {
+        var ajax = new XMLHttpRequest;
+   ajax.open('GET','/company.json');
+   ajax.send();
+   var $form = new DOM('[data-js="form"]');
+   var h1CompanyName = document.createElement('h1');
+   var h2CompanyPhone = document.createElement('h2');
+   var $inputs =  new DOM('[data-js="inputForm"]');
+   var table = new DOM('[data-js = "carTable"]');
+   ajax.addEventListener('readystatechange',handleClickAjax,false);
+   $form.on('submit',handleClickSubmit);
+   function handleClickSubmit(event){
+        event.preventDefault();
+        AddValueonTable();
+        clearInputs();
+   }
 
-})();
+   function handleClickAjax(){
+     if(isRequestOk()){
+        insertCompanyName();
+        insertCompanyPhone();
+     }
+   }
+
+   function isRequestOk(){
+     return ajax.readyState === 4 && ajax.status === 200;
+   }
+
+   function insertCompanyName(){
+    var h1Text = document.createTextNode(JSON.parse(ajax.responseText).name);
+    h1CompanyName.appendChild(h1Text);
+    document.body.insertBefore(h1CompanyName,$form.get()[0]);
+   }
+   function insertCompanyPhone(){
+     var h2Text = document.createTextNode(JSON.parse(ajax.responseText).phone);
+     h2CompanyPhone.appendChild(h2Text);
+     document.body.insertBefore(h2CompanyPhone,$form.get()[0]);
+
+   }
+
+   function AddValueonTable(){
+           var tr = createLineOnTable()
+            $inputs.forEach(function(input,index,arr){
+              var td = document.createElement('td');
+              td.appendChild(document.createTextNode(input.value));
+              tr.appendChild(td);
+            })
+            table.get()[0].appendChild(tr);
+   }
+
+   function createLineOnTable(){
+        return  document.createElement('tr');
+
+   }
+
+   function clearInputs(){
+       $inputs.forEach(function(input){
+            input.value = '';
+       })
+   }
+  }
+   app();
+
+})(window);
