@@ -32,12 +32,11 @@
   */
    function app()
    {
-        var ajax = new XMLHttpRequest;
+   var ajax = new XMLHttpRequest;
    ajax.open('GET','/company.json');
    ajax.send();
    var $form = new DOM('[data-js="form"]');
    var h1CompanyName = document.createElement('h1');
-   var h2CompanyPhone = document.createElement('h2');
    var $inputs =  new DOM('[data-js="inputForm"]');
    var table = new DOM('[data-js = "carTable"]');
    ajax.addEventListener('readystatechange',handleClickAjax,false);
@@ -51,7 +50,7 @@
    function handleClickAjax(){
      if(isRequestOk()){
         insertCompanyName();
-        insertCompanyPhone();
+
      }
    }
 
@@ -60,25 +59,29 @@
    }
 
    function insertCompanyName(){
-    var h1Text = document.createTextNode(JSON.parse(ajax.responseText).name);
+    var h1Text = document.createTextNode(JSON.parse(ajax.responseText).name + '-' + JSON.parse(ajax.responseText).phone);
     h1CompanyName.appendChild(h1Text);
-    document.body.insertBefore(h1CompanyName,$form.get()[0]);
-   }
-   function insertCompanyPhone(){
-     var h2Text = document.createTextNode(JSON.parse(ajax.responseText).phone);
-     h2CompanyPhone.appendChild(h2Text);
-     document.body.insertBefore(h2CompanyPhone,$form.get()[0]);
-
+    document.body.insertBefore(h1CompanyName,$form.get());
    }
 
    function AddValueonTable(){
            var tr = createLineOnTable()
             $inputs.forEach(function(input,index,arr){
               var td = document.createElement('td');
-              td.appendChild(document.createTextNode(input.value));
-              tr.appendChild(td);
+              if(index === 4)
+              {
+                var $image = document.createElement('img');
+                $image.setAttribute('src',input.value);
+                td.appendChild($image);
+              }
+              else
+              {
+              td.textContent = input.value
+              }
+            tr.appendChild(td);
+
             })
-            table.get()[0].appendChild(tr);
+            table.get().appendChild(tr);
    }
 
    function createLineOnTable(){

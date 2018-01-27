@@ -44,8 +44,10 @@ DOM.prototype.some = function (callback) {
   Array.prototype.some.call(this.element, callback);
 }
 
-DOM.prototype.get = function get() {
-  return this.element;
+DOM.prototype.get = function get(index) {
+  if(!index)
+    return this.element[0];
+  return this.element[index];
 }
 window.DOM = DOM;
 })(window);
